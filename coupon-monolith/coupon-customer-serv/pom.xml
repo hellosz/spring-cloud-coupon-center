@@ -17,5 +17,16 @@
         <module>coupon-customer-dao</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${parent.groupId}</groupId>
+                <artifactId>coupon-template-api</artifactId>
+                <version>${parent.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
 
 </project>

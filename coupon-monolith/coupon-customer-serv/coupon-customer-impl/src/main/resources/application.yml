@@ -1,0 +1,37 @@
+server:
+  port: 20001
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: coupon-customer-serv
+  datasource:
+    username: username
+    password: password
+    url: jdbc:mysql://127.0.0.1:3306/geekbang_coupon?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    # 连接池
+    hikari:
+      pool-name: coupon-template-serv-hikariCP
+      auto-commit: true
+      connection-timeout: 5000
+      idle-timeout: 30000
+      maximum-pool-size: 5
+      minimum-idle: 2
+      max-lifetime: 60000
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+    open-in-view: false
+
+logging:
+  level:
+    com.ralph.coupon: debug
+    org.hibernate.type.descriptor.sql: trace
