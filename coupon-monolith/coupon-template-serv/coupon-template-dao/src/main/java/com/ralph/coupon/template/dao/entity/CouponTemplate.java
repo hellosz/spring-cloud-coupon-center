@@ -37,7 +37,7 @@ public class CouponTemplate implements Serializable {
     private Long id;
 
     @Column(name = "available", nullable = false)
-    private String available;
+    private Boolean available;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -50,7 +50,7 @@ public class CouponTemplate implements Serializable {
 
     @Column(name = "type", nullable = false)
     @Convert(converter = CouponTypeConverter.class)
-    private CouponType type;
+    private CouponType category;
 
     @CreatedDate
     @Column(name = "created_time", nullable = false)

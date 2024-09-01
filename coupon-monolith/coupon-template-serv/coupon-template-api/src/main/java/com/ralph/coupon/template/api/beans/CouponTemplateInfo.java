@@ -1,5 +1,6 @@
 package com.ralph.coupon.template.api.beans;
 
+import com.ralph.coupon.template.api.beans.rules.TemplateRule;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,13 +40,13 @@ public class CouponTemplateInfo {
     /**
      * 适用店铺 - 为空则则表示没有限制
      */
-    private String shopId;
+    private Long shopId;
 
     /**
      * 优惠券规则
      */
     @NotNull
-    private String rule;
+    private TemplateRule rule;
 
     private Boolean  available;
 }
