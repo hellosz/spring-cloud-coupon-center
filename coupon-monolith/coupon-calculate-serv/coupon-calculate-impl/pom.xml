@@ -18,6 +18,11 @@
     </properties>
 
     <dependencies>
+        <!-- 引入 nacos 注册中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>coupon-calculate-api</artifactId>
