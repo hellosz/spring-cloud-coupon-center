@@ -1,11 +1,11 @@
 server:
-  port: 20000
+  port: 20001
   error:
     include-message: always
 
 spring:
   application:
-    name: coupon-template-serv
+    name: coupon-customer-serv
   datasource:
     username: username
     password: password
@@ -33,5 +33,5 @@ spring:
 
 logging:
   level:
-    com.ralph.coupon.template: debug
+    com.ralph.coupon: debug
     org.hibernate.type.descriptor.sql: trace
