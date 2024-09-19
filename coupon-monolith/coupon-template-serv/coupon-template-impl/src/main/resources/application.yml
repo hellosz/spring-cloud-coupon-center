@@ -7,9 +7,9 @@ spring:
   application:
     name: coupon-template-serv
   datasource:
-    username: username
-    password: password
-    url: jdbc:mysql://127.0.0.1:3306/geekbang_coupon?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
+    username: fabulous
+    password: Tn87941597.
+    url: jdbc:mysql://8.135.120.218:3306/geekbang_coupon?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     # 连接池
@@ -30,6 +30,15 @@ spring:
         format_sql: true
         show_sql: true
     open-in-view: false
+  cloud:
+    nacos:
+      # nacos 服务发现
+      discovery:
+        enabled: true
+        server-addr: 192.168.44.208:8848
+        namespace: 947a7b68-c711-470b-bc3c-9a337001dc16
+        metadata:
+         mydata: coupon-calculate-serv
 
 logging:
   level:
