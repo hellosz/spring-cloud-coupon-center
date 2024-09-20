@@ -1,5 +1,5 @@
 server:
-  port: 20001
+  port: 20002
   error:
     include-message: always
 
@@ -11,7 +11,8 @@ spring:
       # nacos 服务发现
       discovery:
         enabled: true
-        server-addr: 192.168.44.208:8848
+        server-addr: 127.0.0.1:8848
         namespace: 947a7b68-c711-470b-bc3c-9a337001dc16
+        group: COUPON
         metadata:
           mydata: coupon-template-serv

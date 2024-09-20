@@ -65,4 +65,18 @@ public class CouponCustomerController {
 
         return service.findCoupon(request);
     }
+
+    @GetMapping("/retrieveCalculate")
+    public String retrieveCalculate(@RequestParam("msg") String msg) {
+        log.info("retrieve msg: {}", msg);
+
+        return service.retrieveCalculate(msg);
+    }
+
+    @GetMapping("/retrieveTemplate")
+    public String retrieveTemplate(@RequestParam("msg") String msg) {
+        log.info("retrieve msg: {}", msg);
+
+        return service.retrieveTemplate(msg);
+    }
 }

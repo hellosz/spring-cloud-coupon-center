@@ -13,17 +13,46 @@
     <artifactId>coupon-customer-impl</artifactId>
 
     <dependencies>
-        <!-- 内部依赖 -->
+        <!-- 取消内部依赖 -->
+<!--        <dependency>-->
+<!--            <groupId>${parent.groupId}</groupId>-->
+<!--            <artifactId>coupon-template-impl</artifactId>-->
+<!--            <version>${parent.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>${parent.groupId}</groupId>-->
+<!--            <artifactId>coupon-calculate-impl</artifactId>-->
+<!--            <version>${parent.version}</version>-->
+<!--        </dependency>-->
+        <!-- 将服务依赖替换为啊请求依赖 -->
         <dependency>
             <groupId>${parent.groupId}</groupId>
-            <artifactId>coupon-template-impl</artifactId>
+            <artifactId>coupon-template-api</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>${parent.groupId}</groupId>
-            <artifactId>coupon-calculate-impl</artifactId>
+            <artifactId>coupon-calculate-api</artifactId>
             <version>${parent.version}</version>
         </dependency>
+
+        <!-- 服务调用 -->
+        <!-- 服务发现组件 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- 负载均衡 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!-- webflux 服务调用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>${parent.groupId}</groupId>
             <artifactId>coupon-customer-dao</artifactId>

@@ -54,4 +54,20 @@ public interface CouponCustomerService {
      * @return
      */
     List<CouponInfo> findCoupon(SearchCoupon request);
+
+    /**
+     * 请求 calculate 服务
+     *
+     * @param msg
+     * @return
+     */
+    String retrieveCalculate(String msg);
+
+    /**
+     * 请求 template 服务
+     *
+     * @param msg
+     * @return
+     */
+    String retrieveTemplate(String msg);
 }

@@ -73,8 +73,10 @@ public class CouponTemplateController {
         templateService.deleteTemplate(id);
     }
 
+    @GetMapping("/retrieve")
+    public String retrieve(@RequestParam("msg") String msg) {
+        log.info("retrieve msg: {}", msg);
 
-
-
-
+        return msg;
+    }
 }
