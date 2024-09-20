@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -67,10 +68,10 @@ public class CouponCustomerController {
     }
 
     @GetMapping("/retrieveCalculate")
-    public String retrieveCalculate(@RequestParam("msg") String msg) {
+    public String retrieveCalculate(HttpServletRequest request, @RequestParam("msg") String msg) {
         log.info("retrieve msg: {}", msg);
 
-        return service.retrieveCalculate(msg);
+        return service.retrieveCalculate(request, msg);
     }
 
     @GetMapping("/retrieveTemplate")

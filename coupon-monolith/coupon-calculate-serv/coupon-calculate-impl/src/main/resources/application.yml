@@ -16,3 +16,4 @@ spring:
         group: COUPON
         metadata:
           mydata: coupon-template-serv
+          traffic-version: blue

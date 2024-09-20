@@ -17,12 +17,14 @@ import com.ralph.coupon.template.api.beans.CouponTemplateInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -224,11 +226,18 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
     }
 
     @Override
-    public String retrieveCalculate(String msg) {
-        return webclientBuilder.build()
+    public String retrieveCalculate(HttpServletRequest request, String msg) {
+        final String sign = "traffic-version";
+        WebClient.RequestHeadersSpec<?> specs = webclientBuilder.build()
                 .get()
-                .uri("http://coupon-calculate-serv/calculator/retrieve?msg=" + msg)
-                .retrieve()
+                .uri("http://coupon-calculate-serv/calculator/retrieve?msg=" + msg) ;
+
+        // 添加请求头
+        if (StringUtils.isNotBlank(request.getHeader(sign))) {
+            specs.header(sign, request.getHeader(sign));
+        }
+
+        return specs.retrieve()
                 .bodyToMono(String.class)
                 .block();
     }

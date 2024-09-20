@@ -8,6 +8,7 @@ import com.ralph.coupon.customer.api.beans.SearchCoupon;
 import com.ralph.coupon.customer.dao.entity.Coupon;
 import com.ralph.coupon.template.api.beans.CouponInfo;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public interface CouponCustomerService {
      * @param msg
      * @return
      */
-    String retrieveCalculate(String msg);
+    String retrieveCalculate(HttpServletRequest request, String msg);
 
     /**
      * 请求 template 服务

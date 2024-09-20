@@ -1,8 +1,10 @@
 package com.ralph.coupon.customer;
 
+import com.ralph.coupon.customer.config.CanaryRuleConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.ralph")
 @EntityScan(basePackages = "com.ralph")
+@LoadBalancerClient(name = "coupon-calculate-serv", configuration = CanaryRuleConfiguration.class) // 增加自定义的负载均衡策略
 public class CustomerApplication {
 
     public static void main(String[] args) {
