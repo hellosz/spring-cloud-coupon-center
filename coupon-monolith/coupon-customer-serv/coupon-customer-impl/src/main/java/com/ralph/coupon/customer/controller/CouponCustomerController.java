@@ -11,6 +11,8 @@ import com.ralph.coupon.customer.service.intf.CouponCustomerService;
 import com.ralph.coupon.template.api.beans.CouponInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,15 +28,29 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RefreshScope // 动态刷新
 @RequestMapping("coupon-customer")
 public class CouponCustomerController {
 
     @Autowired
     private CouponCustomerService service;
 
+    /**
+     * 关闭 coupon 申请入口
+     *
+     */
+    @Value("${biz.disableCoupon:false}")
+    private Boolean disableCoupon;
+
     @PostMapping("/requestCoupon")
     public Coupon requestCoupon(@Valid @RequestBody RequestCoupon request) {
         log.info("requestCoupon:{}", JSON.toJSONString(request));
+
+        // 动态开关
+        if (disableCoupon) {
+            log.info("requestCoupon disabled");
+            return new Coupon();
+        }
 
         return service.requestCoupon(request);
     }
