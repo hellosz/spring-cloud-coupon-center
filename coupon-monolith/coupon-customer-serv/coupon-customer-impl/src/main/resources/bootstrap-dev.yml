@@ -4,8 +4,6 @@ server:
     include-message: always
 
 spring:
-  application:
-    name: coupon-customer-serv
   datasource:
     username: fabulous
     password: Tn87941597.

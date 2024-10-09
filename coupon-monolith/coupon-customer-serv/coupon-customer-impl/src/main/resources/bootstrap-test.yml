@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: 947a7b68-c711-470b-bc3c-9a337001dc16
+        group: COUPON
+        metadata:
+          mydata: coupon-customer-serv
+
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace: 947a7b68-c711-470b-bc3c-9a337001dc16
+        group: COUPON
+        file-extension: yaml
