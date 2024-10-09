@@ -11,6 +11,8 @@ import com.ralph.coupon.customer.api.enums.CouponStatus;
 import com.ralph.coupon.customer.converter.CouponConverter;
 import com.ralph.coupon.customer.dao.CouponDao;
 import com.ralph.coupon.customer.dao.entity.Coupon;
+import com.ralph.coupon.customer.feign.CalculateService;
+import com.ralph.coupon.customer.feign.TemplateService;
 import com.ralph.coupon.customer.service.intf.CouponCustomerService;
 import com.ralph.coupon.template.api.beans.CouponInfo;
 import com.ralph.coupon.template.api.beans.CouponTemplateInfo;
@@ -45,6 +47,12 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Autowired
     private WebClient.Builder webclientBuilder;
+
+    @Autowired
+    private CalculateService calculateService;
+
+    @Autowired
+    private TemplateService templateService;
 
     /**
      * 领券接口
