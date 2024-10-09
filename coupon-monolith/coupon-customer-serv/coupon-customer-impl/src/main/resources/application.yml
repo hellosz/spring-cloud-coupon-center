@@ -41,7 +41,27 @@ spring:
         metadata:
           mydata: coupon-customer-serv
 
+
 logging:
   level:
     com.ralph.coupon: debug
     org.hibernate.type.descriptor.sql: trace
+    com.ralph.coupon.customer.feign: debug
+feign:
+  client:
+    config:
+      # 全局默认
+      default:
+        # 网络连接超时
+        connect-timeout: 1000
+        # 读超时
+        read-timeout: 5000
+      # 指定服务
+      coupon-template-serv:
+        # 网络连接超时
+        connect-timeout: 1000
+        # 读超时
+        read-timeout: 5000
+  # hystrix 服务降级
+  circuitbreaker:
+    enabled: true

@@ -80,4 +80,20 @@ public class CouponCustomerController {
 
         return service.retrieveTemplate(msg);
     }
+
+    @GetMapping("/timeout")
+    public String timeOut(@RequestParam(value = "timeout", required = false) Integer timeout) {
+        log.info("timeout: {}", timeout);
+
+        return service.timeout(timeout);
+    }
+
+    @GetMapping("/randomBreak")
+    public String randomBreak(@RequestParam("factor") Integer factor) {
+        log.info("randomBreak");
+
+        return service.randomBreak(factor);
+    }
+
+
 }

@@ -46,6 +46,22 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!--hystrix 服务降级-->
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>2.2.10.RELEASE</version>
+                <exclusions>
+                    <!-- 移除 ribbon，避免和 loadbalancer 冲突-->
+                    <exclusion>
+                        <groupId>org.springframework.cloud</groupId>
+                        <artifactId>spring-cloud-netflix-ribbon</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

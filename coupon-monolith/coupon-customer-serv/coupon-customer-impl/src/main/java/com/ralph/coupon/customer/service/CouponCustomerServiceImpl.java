@@ -61,7 +61,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
      */
     @Override
     public Coupon requestCoupon(RequestCoupon request) {
-        CouponTemplateInfo templateInfo = getTemplate(request.getCouponTemplateId());
+//        CouponTemplateInfo templateInfo = getTemplate(request.getCouponTemplateId()); webclient
+        CouponTemplateInfo templateInfo = templateService.getTemplate(request.getCouponTemplateId()); // openfeign
 
         if (templateInfo == null) {
             log.error("invalid template id={}", request.getCouponTemplateId());
@@ -122,12 +123,14 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
                     .orElseThrow(() -> new RuntimeException("Coupon not found"));
 
             CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
-            couponInfo.setTemplate(getTemplate(coupon.getTemplateId()));
+//            couponInfo.setTemplate(getTemplate(coupon.getTemplateId())); // webclient
+            couponInfo.setTemplate(templateService.getTemplate(coupon.getTemplateId())); // openfeign
             order.setCouponInfos(Lists.newArrayList(couponInfo));
         }
 
         // order清算
-        ShoppingCart checkoutInfo = calculateOrderPrice(order);
+//        ShoppingCart checkoutInfo = calculateOrderPrice(order); // webclient
+        ShoppingCart checkoutInfo = calculateService.calculateOrderPrice(order); // openfeign
 
         if (coupon != null) {
             // 如果优惠券没有被结算掉，而用户传递了优惠券，报错提示该订单满足不了优惠条件
@@ -168,14 +171,16 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
             if (couponOptional.isPresent()) {
                 Coupon coupon = couponOptional.get();
                 CouponInfo couponInfo = CouponConverter.convertToCoupon(coupon);
-                couponInfo.setTemplate(getTemplate(coupon.getTemplateId()));
+//                couponInfo.setTemplate(getTemplate(coupon.getTemplateId())); // webclient
+                couponInfo.setTemplate(templateService.getTemplate(coupon.getTemplateId())); // openfeign
                 couponInfos.add(couponInfo);
             }
         }
         order.setCouponInfos(couponInfos);
 
         // 调用接口试算服务
-        return simulateOrder(order);
+//        return simulateOrder(order); // webclient
+        return calculateService.simulateOrder(order); // openfeign
     }
 
     /**
@@ -225,7 +230,8 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
         List<Long> templateIds = coupons.stream()
                 .map(Coupon::getTemplateId)
                 .collect(Collectors.toList());
-        Map<Long, CouponTemplateInfo> templateMap = getTemplateInfoMap(templateIds);
+//        Map<Long, CouponTemplateInfo> templateMap = getTemplateInfoMap(templateIds); // webclient
+        Map<Long, CouponTemplateInfo> templateMap = templateService.getTemplateInfoMap(templateIds); // openfeign
         coupons.stream().forEach(e -> e.setTemplateInfo(templateMap.get(e.getTemplateId())));
 
         return coupons.stream()
@@ -252,12 +258,17 @@ public class CouponCustomerServiceImpl implements CouponCustomerService {
 
     @Override
     public String retrieveTemplate(String msg) {
-        return webclientBuilder.build()
-                .get()
-                .uri("http://coupon-template-serv/template/retrieve?msg=" + msg)
-                .retrieve()
-                .bodyToMono(String.class)
-                .block();
+        return templateService.retrieveTemplate(msg);
+    }
+
+    @Override
+    public String timeout(Integer timeout) {
+        return String.valueOf(templateService.timeout(timeout));
+    }
+
+    @Override
+    public String randomBreak(Integer factor) {
+        return String.valueOf(templateService.randomBreak(factor));
     }
 
     /**

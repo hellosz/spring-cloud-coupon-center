@@ -71,4 +71,20 @@ public interface CouponCustomerService {
      * @return
      */
     String retrieveTemplate(String msg);
+
+    /**
+     * feign 跨服务调用超时测试
+     *
+     * @param timeout
+     * @return
+     */
+    String timeout(Integer timeout);
+
+    /**
+     * 服务调用-随机中断
+     *
+     * @param factor
+     * @return
+     */
+    String randomBreak(Integer factor);
 }

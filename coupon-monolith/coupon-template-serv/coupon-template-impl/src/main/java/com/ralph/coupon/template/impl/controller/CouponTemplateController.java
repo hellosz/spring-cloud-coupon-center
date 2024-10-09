@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName: CouponTemplateController
@@ -78,5 +79,29 @@ public class CouponTemplateController {
         log.info("retrieve msg: {}", msg);
 
         return msg;
+    }
+
+    @GetMapping("/timeout")
+    public boolean timeout(@RequestParam("timeout") Integer timeout) {
+        log.info("timeout: {}", timeout);
+
+        try {
+            TimeUnit.SECONDS.sleep(timeout);
+        } catch (InterruptedException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @GetMapping("/randomBreak")
+    public boolean randomBreak(@RequestParam("factor") Integer factor) {
+        log.info("randomBreak: {}", factor);
+
+        if (factor == null || factor % 2 == 0) {
+            throw new IllegalArgumentException("custom throw exception");
+        }
+
+        return true;
     }
 }
